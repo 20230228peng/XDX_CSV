@@ -4,8 +4,7 @@
 /build/
 /Debug/
 /cmake-build-debug/
-
-
+/venv
 
 # Editor directories and files
 .vscode/*
