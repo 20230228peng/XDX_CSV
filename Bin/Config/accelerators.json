@@ -1,0 +1,13 @@
+{
+  "accelerators": [
+
+    {"modifiers": ["ctrl"], "key": "N", "id": 6000},
+    {"modifiers": ["ctrl"], "key": "O", "id": 6001},
+    {"modifiers": ["ctrl"], "key": "S", "id": 6002},
+    {"modifiers": ["ctrl"], "key": "D", "id": 6003},
+    {"modifiers": [""], "key": "F1", "id": 6020},
+    {"modifiers": [""], "key": "F2", "id": 6021},
+    {"modifiers": [""], "key": "F3", "id": 6022},
+    {"modifiers": [""], "key": "F5", "id": 6041}
+  ]
+}
