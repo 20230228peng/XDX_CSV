@@ -3,10 +3,16 @@ import wx
 import wx.xrc
 import wx.lib.agw.ribbon as rb
 import wx.aui
+from UI.IndexPanel import IndexPanel
 
 from Core.JSON_load import load_accelerator_config
 import gettext
+
+from UI.NodePanel import NodePanel
+
 _ = gettext.gettext
+
+
 
 class IndexFrame(wx.Frame):
 
@@ -24,18 +30,18 @@ class IndexFrame(wx.Frame):
                                          wx.lib.agw.ribbon.RIBBON_BAR_DEFAULT_STYLE)
         self.m_ribbonPage1 = rb.RibbonPage(self.m_ribbonBar1, wx.ID_ANY, _(u"菜单"), wx.NullBitmap, 0)
         self.m_ribbonBar1.SetActivePage(self.m_ribbonPage1)
-        self.m_ribbonPanel1 = rb.RibbonPanel(self.m_ribbonPage1, wx.ID_ANY, _(u"菜单"), wx.NullBitmap,
+        self.m_ribbonPanel1 = rb.RibbonPanel(self.m_ribbonPage1, wx.ID_ANY, _(u"项目"), wx.NullBitmap,
                                              wx.DefaultPosition, wx.DefaultSize,
                                              wx.lib.agw.ribbon.RIBBON_PANEL_DEFAULT_STYLE)
         self.m_ribbonButtonBar1 = rb.RibbonButtonBar(self.m_ribbonPanel1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize,
                                                      0)
-        self.m_ribbonButtonBar1.AddSimpleButton(6001, _(u"新建"), wx.Bitmap(u"./Image/Menu/新建.png", wx.BITMAP_TYPE_ANY),
+        self.m_ribbonButtonBar1.AddSimpleButton(6000, _(u"新建"), wx.Bitmap(u"./Image/Menu/新建.png", wx.BITMAP_TYPE_ANY),
                                                 wx.EmptyString)
-        self.m_ribbonButtonBar1.AddSimpleButton(6002, _(u"打开"), wx.Bitmap(u"./Image/Menu/打开.png", wx.BITMAP_TYPE_ANY),
+        self.m_ribbonButtonBar1.AddSimpleButton(6001, _(u"打开"), wx.Bitmap(u"./Image/Menu/打开.png", wx.BITMAP_TYPE_ANY),
                                                 wx.EmptyString)
-        self.m_ribbonButtonBar1.AddSimpleButton(6003, _(u"保存"), wx.Bitmap(u"./Image/Menu/保存.png", wx.BITMAP_TYPE_ANY),
+        self.m_ribbonButtonBar1.AddSimpleButton(6002, _(u"保存"), wx.Bitmap(u"./Image/Menu/保存.png", wx.BITMAP_TYPE_ANY),
                                                 wx.EmptyString)
-        self.m_ribbonButtonBar1.AddSimpleButton(6004, _(u"设置"), wx.Bitmap(u"./Image/Menu/设置.png", wx.BITMAP_TYPE_ANY),
+        self.m_ribbonButtonBar1.AddSimpleButton(6003, _(u"设置"), wx.Bitmap(u"./Image/Menu/设置.png", wx.BITMAP_TYPE_ANY),
                                                 wx.EmptyString)
         self.m_ribbonPanel2 = rb.RibbonPanel(self.m_ribbonPage1, wx.ID_ANY, wx.EmptyString, wx.NullBitmap,
                                              wx.DefaultPosition, wx.DefaultSize,
@@ -91,9 +97,13 @@ class IndexFrame(wx.Frame):
         bSizer3 = wx.BoxSizer(wx.VERTICAL)
 
         self.m_notebook1 = wx.Notebook(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
-        self.m_panel1 = wx.Panel(self.m_notebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
+
+
+        # self.m_panel1 = wx.Panel(self.m_notebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
+
+        self.m_panel1 = IndexPanel(self.m_notebook1, bg_image_path="./Image/background.png")
         self.m_notebook1.AddPage(self.m_panel1, _(u"主页"), True)
-        self.m_panel2 = wx.Panel(self.m_notebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
+        self.m_panel2 = NodePanel(self.m_notebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.m_notebook1.AddPage(self.m_panel2, _(u"自定义"), False)
         self.m_panel3 = wx.Panel(self.m_notebook1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL)
         self.m_notebook1.AddPage(self.m_panel3, _(u"测试"), False)
@@ -104,14 +114,22 @@ class IndexFrame(wx.Frame):
 
         self.SetSizer(bSizer1)
         self.Layout()
-        self.m_statusBar1 = self.CreateStatusBar(5, wx.STB_SIZEGRIP, wx.ID_ANY)
-        self.m_statusBar1.SetStatusWidths([-4, -4, -2, -4, -1])  # 第5栏为伸缩栏
+        self.m_statusBar1 = self.CreateStatusBar(3, wx.STB_SIZEGRIP, wx.ID_ANY)
+        self.m_statusBar1.SetStatusWidths([-4, -3, -1])  # 第5栏为伸缩栏
         self.Centre(wx.BOTH)
 
         # 调用快捷键
         self.load_id_select()
         # 处理快捷键函数
         self.setup_accelerators()
+
+
+        # event
+        # 工具栏装填隐藏
+        self.m_ribbonBar1.Bind(wx.EVT_RIGHT_DOWN,self.hit_bar)
+        self.m_ribbonBar1.Bind(wx.EVT_LEFT_DOWN, self.show_bar)
+
+
 
     def load_id_select(self, event=None):
         """
@@ -243,6 +261,14 @@ class IndexFrame(wx.Frame):
         else:
             # 可选：如果处理函数不存在，也可以记录日志或显示警告
             wx.LogWarning(f"No handler found for event ID {event_id}")
+
+    def hit_bar(self,event):
+        self.m_ribbonBar1.ShowPanels(False)
+        event.Skip()
+
+    def show_bar(self,event):
+        self.m_ribbonBar1.ShowPanels(True)
+        event.Skip()
 
     def index_tool_6010(self, event):
 
