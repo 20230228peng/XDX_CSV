@@ -30,6 +30,8 @@ class NewProjectDialog(wx.Dialog):
 
         self.m_dirPicker2 = wx.DirPickerCtrl(self, wx.ID_ANY, wx.EmptyString, _(u"Select a folder"), wx.DefaultPosition,
                                              wx.DefaultSize, wx.DIRP_DEFAULT_STYLE | wx.DIRP_SMALL)
+        self.m_dirPicker2.Disable()
+
         bSizer11.Add(self.m_dirPicker2, 0, wx.ALL | wx.EXPAND, 5)
 
         self.m_staticline3 = wx.StaticLine(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL)
@@ -45,6 +47,7 @@ class NewProjectDialog(wx.Dialog):
         fgSizer1.Add(self.m_staticText4, 0, wx.ALL, 5)
 
         self.m_textCtrl1 = wx.TextCtrl(self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0)
+
         fgSizer1.Add(self.m_textCtrl1, 0, wx.ALL | wx.EXPAND, 5)
 
         self.m_staticText5 = wx.StaticText(self, wx.ID_ANY, _(u"项目类型："), wx.DefaultPosition, wx.DefaultSize, 0)

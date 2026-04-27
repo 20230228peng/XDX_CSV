@@ -10,7 +10,7 @@ if __name__ == '__main__':
     app = wx.App()
 
     # 图标和启动画面...
-    icon_path = "XDX.ico"
+    icon_path = "128x128.ico"
 
     if os.path.exists(icon_path):
         app_icon = wx.Icon(icon_path, wx.BITMAP_TYPE_ICO)
@@ -19,5 +19,6 @@ if __name__ == '__main__':
 
 
     frame = IndexMenuEvent(None,"XDX_CSV Cal")
+    frame.SetIcon(app_icon)
     frame.Show()
     app.MainLoop()

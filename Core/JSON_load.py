@@ -50,18 +50,18 @@ def load_accelerator_config(config_path):
     return accelerator_entries
 
 
-def default_user_db_path(load_default_user_path):
+def default_user_db_path(load_default_json_path):
     """
-
+    加载JSON文件为字典
     :param load_default_user_path:
-    :return:
+    :return: 将JSON转换为字典
     """
     try:
-        with open(load_default_user_path, 'r', encoding='utf-8') as f:
-            default_users_dir = json.load(f)
+        with open(load_default_json_path, 'r', encoding='utf-8') as f:
+            default_json_dir = json.load(f)
     except FileNotFoundError:
-        raise RuntimeError(f"默认通道名称不存在")
+        raise RuntimeError(f"名称不存在")
     except json.JSONDecodeError:
-        raise RuntimeError(f"配置文件格式错误")
-    return default_users_dir
+        raise RuntimeError(f"文件格式错误")
+    return default_json_dir
 

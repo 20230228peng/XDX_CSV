@@ -111,6 +111,7 @@ class IndexPanel(wx.Panel):
         """
         加载项目文件夹，刷新文件树
         :param project_folder_path: 项目文件夹路径
+        :return:
         """
         if not os.path.isdir(project_folder_path):
             wx.MessageBox(f"项目文件夹不存在：{project_folder_path}", "错误", wx.OK | wx.ICON_ERROR)
@@ -165,7 +166,11 @@ class IndexPanel(wx.Panel):
 
     # ==================== 事件处理 ====================
     def on_dir_changed(self, event):
-        """用户选择文件夹后自动加载"""
+        """
+        用户选择文件夹后自动加载
+        :param event:
+        :return:
+        """
         folder_path = self.m_dirPicker1.GetPath()
         if folder_path and os.path.isdir(folder_path):
             self.load_project(folder_path)
@@ -178,16 +183,30 @@ class IndexPanel(wx.Panel):
         event.Skip()
 
     def on_calc(self, event):
-        """计算按钮点击事件（根据实际需求实现）"""
+        """
+        计算按钮点击事件（根据实际需求实现）
+        :param event:
+        :return:
+        """
         wx.MessageBox("计算功能待实现", "提示", wx.OK | wx.ICON_INFORMATION)
         event.Skip()
 
     # ==================== 背景绘制（保留） ====================
     def on_size(self, event):
+        """
+
+        :param event:
+        :return:
+        """
         event.Skip()
         self.Refresh()
 
     def on_paint(self, event):
+        """
+
+        :param event:
+        :return:
+        """
         if not self.background_bmp or not self.background_bmp.IsOk():
             event.Skip()
             return

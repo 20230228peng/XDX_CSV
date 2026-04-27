@@ -5,6 +5,7 @@
 /Debug/
 /cmake-build-debug/
 /venv
+/Data/测试
 
 # Editor directories and files
 .vscode/*

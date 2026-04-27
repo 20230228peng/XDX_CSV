@@ -38,6 +38,7 @@ class IndexMenuEvent(IndexFrame):
         """
         新建项目
         :param event:
+        :return:
         """
 
         # 确定 Data 根目录（使用当前工作目录下的 Data 文件夹）
